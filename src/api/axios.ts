@@ -3,7 +3,7 @@ import { config } from '../config';
 import { jwtService } from '../services/JWTService';
 import assert from 'assert';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: config.baseUrl,
   headers: {
     // 'Content-Type': 'application/json',
@@ -20,5 +20,3 @@ export const withAuthHeader = () => {
 
   return { Authorization: `Bearer ${token}` };
 };
-
-export { api };

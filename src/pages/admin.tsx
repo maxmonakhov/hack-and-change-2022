@@ -1,24 +1,39 @@
 import { PageContent } from '../components/PageContent';
-import { isAuthorized } from '../features/authorization/hooks/isAuthorized';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Chat } from '../features/chat/';
+import { useGetDialogId } from '../features/chat/hooks/useGetDialogId';
+import {
+  AuthData,
+  getAuthData
+} from '../features/authorization/hooks/getAuthData';
 
 const AdminPage = () => {
   const { push } = useRouter();
 
-  const [authorized, setIsAuthorized] = useState(false);
+  const [authData, setAuthData] = useState<AuthData | null>();
+  const { isAuthorized, user } = authData || {};
+  const { userId } = user || {};
+
+  const { data: dialogIdData, isError: isGettingDialogIdError } =
+    useGetDialogId({ enabled: isAuthorized });
+  const { dialogId } = dialogIdData || {};
 
   useEffect(() => {
-    if (!isAuthorized()) void push('/login');
-    else setIsAuthorized(true);
+    const authData = getAuthData();
+
+    if (!authData.isAuthorized) void push('/login');
+    else setAuthData(authData);
   }, []);
 
-  if (!authorized) return null;
+  if (isGettingDialogIdError)
+    return <p className="text-xl text-accent">Can't get dialog id. </p>;
+
+  if (!dialogId || !isAuthorized || !userId) return null;
 
   return (
     <PageContent>
-      <Chat />
+      <Chat currentUserId={userId} dialogId={dialogId} />
     </PageContent>
   );
 };
