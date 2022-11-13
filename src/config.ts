@@ -2,7 +2,7 @@ const baseUrl = 'https://hack.invest-open.ru';
 const fileUploaderAPIKey = 'public_12a1xs86Ty4DXYmCse8piPh4QS7L';
 
 const refetchQueries = {
-  enabled: false,
+  enabled: true,
   refetchInterval: 100
 };
 

@@ -32,7 +32,6 @@ const LoginForm = () => {
         {
           onSuccess: (response) => {
             jwtService.setJWTToken(response.jwtToken);
-            console.log('Authorized successfully');
             void push('/');
           }
         }
@@ -45,7 +44,7 @@ const LoginForm = () => {
     <div className="card card-compact w-96 bg-base-100 p-5 shadow-xl">
       <div className="card-body">
         <p className="mt-2 text-center text-2xl">
-          Добро пожаловать, <br /> оператор!
+          Добро пожаловать, <br /> в чат инвестиций!
         </p>
 
         <form className="mt-6" onSubmit={handleFormSubmit}>

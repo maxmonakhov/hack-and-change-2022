@@ -11,15 +11,8 @@ type MessagesListProps = {
 const MessagesList = (props: MessagesListProps) => {
   const { messages: initialMessages, currentUserId } = props;
 
-  console.log('--- message List rerenders');
-
   const messages = initialMessages.sort(
     (one, another) => one.timestamp - another.timestamp
-  );
-
-  console.log(
-    'messages',
-    messages.filter((message) => !!message.data)
   );
 
   return (

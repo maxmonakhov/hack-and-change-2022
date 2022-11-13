@@ -34,8 +34,6 @@ const MessageInput = (props: MessageInputProps) => {
   const [willDocumentBeSigned, setWillDocumentBeSigned] =
     useState<boolean>(false);
 
-  console.log('--- willDocumentBeSigned', willDocumentBeSigned);
-
   const [investIdeaWidgetData, setInvestIdeaWidgetData] = useState<
     InvestIdeaWidget['data']['widgetData'] | undefined
   >(undefined);
@@ -85,8 +83,6 @@ const MessageInput = (props: MessageInputProps) => {
 
     let messageType: ChatMessageType | undefined;
 
-    console.log('--- willDocumentBeSigned', willDocumentBeSigned);
-
     if (willDocumentBeSigned || investIdeaWidgetData) {
       messageType = 'WIDGET';
     } else if (!!fileUrl) {
@@ -108,7 +104,6 @@ const MessageInput = (props: MessageInputProps) => {
       };
       request.data = data;
     } else if (willDocumentBeSigned) {
-      console.log('--- setting data fro Signed document before sending');
       const data: SignableWidget['data'] = {
         widgetType: 'SIGNABLE',
         widgetData: {

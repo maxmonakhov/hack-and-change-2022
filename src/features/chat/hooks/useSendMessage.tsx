@@ -50,8 +50,6 @@ export const useSendMessage = (
     { previousMessages: ChatMessage[] }
   >(
     async (request) => {
-      console.log('--- SENDING REQUEST:', request);
-
       const formattedRequest = { ...request };
 
       if (request.data) formattedRequest['data'] = JSON.stringify(request.data);
