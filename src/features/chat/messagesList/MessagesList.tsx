@@ -17,6 +17,11 @@ const MessagesList = (props: MessagesListProps) => {
     (one, another) => one.timestamp - another.timestamp
   );
 
+  console.log(
+    'messages',
+    messages.filter((message) => !!message.data)
+  );
+
   return (
     <>
       {messages.length === 0 ? (
@@ -35,7 +40,10 @@ const MessagesList = (props: MessagesListProps) => {
                 'justify-start': !isCurrentUserMessage
               })}
             >
-              <Message message={message} />
+              <Message
+                isCurrentUserMessage={isCurrentUserMessage}
+                message={message}
+              />
             </div>
           );
         })

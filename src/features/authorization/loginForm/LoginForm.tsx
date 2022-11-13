@@ -37,8 +37,6 @@ const LoginForm = () => {
           }
         }
       );
-
-      console.log('submitted');
     },
     [login, password]
   );

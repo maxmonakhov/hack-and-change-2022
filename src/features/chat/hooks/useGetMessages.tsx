@@ -7,9 +7,9 @@ export type ChatMessageType = 'TEXT' | 'MEDIA' | 'WIDGET';
 export type ChatMessage = {
   messageId: string;
   text: string;
-  data?: {};
+  data?: {} | null;
   messageType: ChatMessageType;
-  mediaUrl?: string;
+  mediaUrl?: string | null;
   sender: number;
   recipient: number;
   dialogId: number;
@@ -22,21 +22,21 @@ export type Widget = ChatMessage & {
   messageType: 'WIDGET';
   data: {
     widgetType: WidgetType;
-    data: {};
+    widgetData: {};
   };
 };
 
 export type SignableWidget = Widget & {
   data: {
     widgetType: 'SIGNABLE';
-    data: { isSigned: boolean };
+    widgetData: { isSigned: boolean };
   };
 };
 
 export type InvestIdeaWidget = Widget & {
   data: {
     widgetType: 'INVEST_IDEA';
-    data: {
+    widgetData: {
       symbol: string;
       quantity: number;
       price: number;
@@ -52,8 +52,12 @@ type GetMessagesRequest = {
 
 type GetMessagesResponse = ChatMessage[];
 
+type ChatMessageWithStringData = ChatMessage & {
+  data: string | null;
+};
+
 type GetMessagesResponseAxios = {
-  messages: ChatMessage[];
+  messages: ChatMessageWithStringData[];
 };
 
 export const useGetMessages = (
@@ -70,7 +74,23 @@ export const useGetMessages = (
         headers: withAuthHeader()
       });
 
-      return response.data.messages;
+      const messages = response.data.messages;
+
+      const transformedMessages = messages.map((message) => {
+        let data = message.data;
+        if (data) {
+          try {
+            data = JSON.parse(data);
+          } catch (e) {}
+        }
+
+        return {
+          ...message,
+          data
+        };
+      });
+
+      return transformedMessages;
     },
     options
   );

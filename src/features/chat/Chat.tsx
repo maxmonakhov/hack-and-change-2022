@@ -4,6 +4,7 @@ import { MessagesList } from './messagesList';
 import { Spinner } from '../../components/spinner';
 import { MessageInput } from './messageInput';
 import { config } from '../../config';
+import clsx from 'clsx';
 
 type ChatProps = {
   currentUserId: number;
@@ -18,9 +19,8 @@ const Chat = (props: ChatProps) => {
     isLoading: areMessagesLoading,
     isError: isGetingMessagesError
   } = useGetMessages(
-    { dialogId: dialogId || 0 },
+    { dialogId: dialogId, limit: config.fetchMessagesLimit },
     {
-      enabled: !!dialogId,
       refetchInterval: () =>
         config.refetchQueries.enabled && config.refetchQueries.refetchInterval
     }
@@ -49,10 +49,12 @@ const Chat = (props: ChatProps) => {
     <div className="flex h-[600px] w-[600px] flex-col rounded-xl shadow-xl">
       <div
         ref={scrollableListRef}
-        className="mt-6 flex-1 overflow-y-scroll px-6 pb-6"
+        className={clsx('mt-6 flex-1 overflow-y-scroll px-6 pb-6', {
+          flex: areMessagesLoading
+        })}
       >
         {areMessagesLoading ? (
-          <div className="flex items-center justify-center">
+          <div className="flex flex-1 flex-col items-center justify-center">
             <Spinner />
           </div>
         ) : (
@@ -62,15 +64,11 @@ const Chat = (props: ChatProps) => {
           />
         )}
       </div>
-      <div className="bg-slate-100">
-        <div className="p-3">
-          <MessageInput
-            sender={currentUserId}
-            recipient={recipient || 0}
-            dialogId={dialogId}
-          />
-        </div>
-      </div>
+      <MessageInput
+        sender={currentUserId}
+        recipient={recipient || 0}
+        dialogId={dialogId}
+      />
     </div>
   );
 };

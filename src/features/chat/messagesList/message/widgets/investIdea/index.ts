@@ -1,1 +1,1 @@
-export { default as InvestIdea } from './InvestIdea';
+export { default as InvestIdeaWidget } from './InvestIdea';

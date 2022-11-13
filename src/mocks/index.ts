@@ -1,6 +1,7 @@
 import { ChatMessage } from '../features/chat/hooks/useGetMessages';
+import messagesList from '../features/chat/messagesList/MessagesList';
 
-const messagesList: ChatMessage[] = [
+const massagesListMock: ChatMessage[] = [
   {
     messageId: '2a0da872-f8a8-4316-bb23-02a1161ea84d',
     text: 'Привет, оператор!',

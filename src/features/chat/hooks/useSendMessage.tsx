@@ -50,11 +50,21 @@ export const useSendMessage = (
     { previousMessages: ChatMessage[] }
   >(
     async (request) => {
+      console.log('--- SENDING REQUEST:', request);
+
+      const formattedRequest = { ...request };
+
+      if (request.data) formattedRequest['data'] = JSON.stringify(request.data);
+
       const response = await api.post<
         SendMessageResponse,
         AxiosResponse<SendMessageResponse>,
         SendMessageRequestAxios
-      >('message/send', { message: request }, { headers: withAuthHeader() });
+      >(
+        'message/send',
+        { message: formattedRequest },
+        { headers: withAuthHeader() }
+      );
 
       return response.data;
     },
@@ -71,14 +81,6 @@ export const useSendMessage = (
 
           queryClient.setQueryData<ChatMessage[]>(['messages'], (old) => {
             const oldMessages = old || [];
-
-            console.log('12212', {
-              ...request,
-              messageId: 'optimistically_updated_user',
-              sender,
-              recipient,
-              timestamp: new Date().getTime()
-            });
 
             return [
               ...oldMessages,
@@ -104,7 +106,6 @@ export const useSendMessage = (
         }
       },
       onSettled: () => {
-        console.log('--- onsettled runs');
         void queryClient.invalidateQueries({ queryKey: ['messages'] });
       },
       ...options

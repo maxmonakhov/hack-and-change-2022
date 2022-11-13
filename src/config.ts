@@ -8,9 +8,12 @@ const refetchQueries = {
 
 const optimisticUpdateEnabled = false;
 
+const fetchMessagesLimit = 30;
+
 export const config = {
   baseUrl,
   fileUploaderAPIKey,
   refetchQueries,
+  fetchMessagesLimit,
   optimisticUpdateEnabled
 };
