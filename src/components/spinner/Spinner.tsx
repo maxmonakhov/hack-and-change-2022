@@ -1,4 +1,4 @@
-import { ClipLoader } from 'react-spinners';
+import { PuffLoader } from 'react-spinners';
 
 type SpinnerProps = {
   size?: string;
@@ -9,7 +9,7 @@ const Spinner = (props: SpinnerProps) => {
 
   return (
     <>
-      <ClipLoader
+      <PuffLoader
         color="#3ABEF8"
         loading={true}
         size={size}

@@ -33,7 +33,9 @@ const AdminPage = () => {
 
   return (
     <PageContent>
-      <Chat currentUserId={userId} dialogId={dialogId} />
+      <div className="flex flex-col items-center justify-center">
+        <Chat currentUserId={userId} dialogId={dialogId} />
+      </div>
     </PageContent>
   );
 };

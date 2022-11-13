@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { api } from '../../../api/axios';
 
 import { sha256 } from 'js-sha256';
@@ -9,8 +9,12 @@ type AuthorizeRequest = {
   password: string;
 };
 
-export const useAuthorize = () => {
-  return useMutation<UserDataWithJWT, Error, AuthorizeRequest>(
+type AuthorizeResponse = UserDataWithJWT;
+
+export const useAuthorize = (
+  options?: UseMutationOptions<AuthorizeResponse, unknown, AuthorizeRequest>
+) => {
+  return useMutation<UserDataWithJWT, unknown, AuthorizeRequest>(
     async (request) => {
       const { login, password } = request;
 
@@ -20,6 +24,7 @@ export const useAuthorize = () => {
       });
 
       return response.data;
-    }
+    },
+    options
   );
 };
