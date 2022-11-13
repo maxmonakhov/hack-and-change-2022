@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Хакатон Hack & Change
+## Трек: 2 "Advisory сервис для Открытие Инвестиции"
 
-## Getting Started
+[Файлы хакатона](https://drive.google.com/drive/folders/1GnO0WG_2_fXJ0HWqj4wYTZ_NgqAi1yIM)
 
-First, run the development server:
+[Тестовое API](https://documenter.getpostman.com/view/7834747/2s8YepsXyp)
 
-```bash
-npm run dev
-# or
-yarn dev
+
+> Время на выполнение проекта: вечер пятницы - утро воскресенья.
+> 
+> Потраченное время на реализацию: 26 часов
+>
+> _26 часов Без сна..._
+### Что это за проект
+Веб-интерфейс к интерактивному чату с дополнительным функционалом, который помогает инвестиционному консультанту и его клиенту обсуждать инвестиционные идеи.
+
+### Функционал
+1. Аутентификация через JWT токен
+2. Просмотр сообщений в чате
+3. Отправка сообщений разных видов:
+   1. Текст
+   2. Прикрепленный документ
+   3. Виджет с возможностью попросить собеседника его подписать
+   4. [Не успели, но очень хотели] : виджет для отправки инвестиционной идеи. Прямо в чате должен был отображаться график акции и точка (дата + цена акции), которая является прогнозом консультанта для клиента. Для этого виджета половину кода написать все-таки успели.
+
+
+### Showcase
+
+Логин
+
+<img src="docs/demo/login.png" width="425"/>
+
+<br>
+
+Первый экран чата и загрузка файлов
+
+<img src="docs/demo/base-messages.png" width="425"/> <img src="docs/demo/upload.png" width="425"/> 
+
+Виджеты для лучшего UX
+
+<img src="docs/demo/widgets-overview.png" width="425"/> <img src="docs/demo/signable-widget-creator.png" width="425"/> 
+
+
+Подписание виджета
+
+<img src="docs/demo/signable-widget-viewer.png" width="425"/> <img src="docs/demo/signable-widget-signed.png" width="425"/> 
+
+
+
+### Запуск программы
+
+В корне проекта (на одном уровне с файлом package.json), нужно выполнить команды
+
+```shell
+  npm i
+  npm dev # откроет проект по порту 3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Затем проект можно открыть в браузере по ссылке http://localhost:3000/login.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+** Также, команда `npm dev-other` запускает второй инстанс проекта по порту 3333.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+После авторизации в этих инстансах под разными аккаунтами между ними можно вести переписку.
+  `
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+###Используемые технологии
+- NextJS
+- TypeScript
+- Tailwindcss
+- react-query
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<br>

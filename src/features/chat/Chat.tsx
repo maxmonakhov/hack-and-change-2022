@@ -37,7 +37,7 @@ const Chat = (props: ChatProps) => {
   useEffect(() => {
     const scrollableList = scrollableListRef.current;
 
-    if (scrollableList && config.refetchQueries.enabled) {
+    if (scrollableList && !config.refetchQueries.enabled) {
       scrollableList.scrollTop = scrollableList.scrollHeight;
     }
   }, [messages, scrollableListRef]);
